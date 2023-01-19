@@ -22,13 +22,21 @@ const startServer = async () => {
 };
 startServer();
 //GET stated API 1
+const requiredDataType = (object) => {
+  return {
+    stateId: object.state_id,
+    stateName: object.state_name,
+    population: object.population,
+  };
+};
+
 app.get("/states/", async (request, response) => {
   const getStatesQuery = `
     select *
     from state
     `;
   const statesArray = await db.all(getStatesQuery);
-  response.send(statesArray);
+  response.send(statesArray.map((each) => requiredDataType(each)));
 });
 
 //GET state by ID API 2
@@ -38,8 +46,8 @@ app.get("/states/:stateId/", async (request, response) => {
     select *
     from state
     where state_id = ${stateId}`;
-  state = await db.get(getStateQuery);
-  response.send(state);
+  const state = await db.get(getStateQuery);
+  response.send(requiredDataType(state));
 });
 
 //POST API 3
@@ -77,7 +85,7 @@ app.get("/districts/:districtId/", async (request, response) => {
     from district
     where district_id = ${districtId}`;
   const districtDetail = await db.get(getDistrictByID);
-  response.send(districtDetail);
+  response.send(requiredDataType(districtDetail));
 });
 
 //DELETE district API 5
@@ -126,7 +134,7 @@ app.get("/states/:stateId/stats/", async (request, response) => {
     from state
     where state_id = ${stateId}`;
   const statsResponse = await db.get(getStatsQuery);
-  response.send(statsResponse);
+  response.send(requiredDataType(statsResponse));
 });
 //GET state detail API 8
 app.get("/districts/:districtId/details/", async (request, response) => {
@@ -137,7 +145,7 @@ app.get("/districts/:districtId/details/", async (request, response) => {
     where district_id = ${districtId}`;
 
   const distResponse = await db.get(getDistQuery);
-  response.send(distResponse);
+  response.send(requiredDataType(distResponse));
 });
 
 module.exports = app;

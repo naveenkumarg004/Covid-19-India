@@ -32,7 +32,7 @@ Content-Type : application/json
   "cases": 9628,
   "cured": 6524,
   "active": 3000,
-  "deaths": 104
+  "deaths": 104 
 }
 ###
 GET http://localhost:3000/states/350/stats/
