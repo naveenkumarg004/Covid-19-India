@@ -27,7 +27,6 @@ const requiredDataType12 = (object) => {
     stateId: object.state_id,
     stateName: object.state_name,
     population: object.population,
-
   };
 };
 //GET stated API 1
@@ -79,17 +78,17 @@ app.post("/districts/", async (request, response) => {
 });
 
 //GET Districts with IDs API 4
-const requiredDataType4 = (obj) =>{
-    return {
-        districtId :  obj.district_id ,
-        districtName : obj.district_name ,
-        stateId : obj.state_id ,
-        cases : obj.cases ,
-        cured : obj.cured ,
-        active : obj.active ,
-        deaths : obj.deaths ,
-    }
-}
+const requiredDataType4 = (obj) => {
+  return {
+    districtId: obj.district_id,
+    districtName: obj.district_name,
+    stateId: obj.state_id,
+    cases: obj.cases,
+    cured: obj.cured,
+    active: obj.active,
+    deaths: obj.deaths,
+  };
+};
 
 app.get("/districts/:districtId/", async (request, response) => {
   const { districtId } = request.params;
@@ -141,12 +140,12 @@ app.put("/districts/:districtId/", async (request, response) => {
 
 //GET status API 7
 //const requiredType7 = (object) => {
- // return {
-  //  totalCases: total_cases,
-   // totalCured : total_cured ,
- //   totalActive : total_active, 
- //   totalDeaths : total_deaths
- // };
+// return {
+//  totalCases: total_cases,
+// totalCured : total_cured ,
+//   totalActive : total_active,
+//   totalDeaths : total_deaths
+// };
 app.get("/states/:stateId/stats/", async (request, response) => {
   const { stateId } = request.params;
   const getStatsQuery = `
@@ -160,9 +159,9 @@ app.get("/states/:stateId/stats/", async (request, response) => {
   response.send(stateResponse);
 });
 //GET state detail API 8
-const requiredDataType8 = (obj) =>[
-    return { stateName: obj.state_name}
-]
+const requiredDataType8 = (obj) => {
+  return { stateName: obj.state_name };
+};
 
 app.get("/districts/:districtId/details/", async (request, response) => {
   const { districtId } = request.params;
